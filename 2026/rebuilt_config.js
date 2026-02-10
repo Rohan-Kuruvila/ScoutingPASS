@@ -4,57 +4,25 @@ var config_data = `
   "title": "Scouting PASS 2026",
   "page_title": "REBUILT",
   "checkboxAs": "10",
+
   "prematch": [
-    { "name": "Scouter Initials",
-      "code": "s",
-      "type": "scouter",
-      "size": 5,
-      "maxSize": 5,
-      "required": "true"
+    { "name": "Scouter Initials", "code": "s", "type": "scouter", "size": 5, "maxSize": 5, "required": "true" },
+    { "name": "Event", "code": "e", "type": "event", "defaultValue": "", "required": "true" },
+    { "name": "Match Level", "code": "l", "type": "level",
+      "choices": { "qm": "Quals<br>", "sf": "Semifinals<br>", "f": "Finals" },
+      "defaultValue": "qm", "required": "true"
     },
-    { "name": "Event",
-      "code": "e",
-      "type": "event",
-      "defaultValue": "2026ilch",
-      "required": "true"
-    },
-    { "name": "Match Level",
-      "code": "l",
-      "type": "level",
+    { "name": "Match #", "code": "m", "type": "match", "min": 1, "max": 150, "required": "true" },
+    { "name": "Robot", "code": "r", "type": "robot",
       "choices": {
-        "qm": "Quals<br>",
-        "sf": "Semifinals<br>",
-        "f": "Finals"
-      },
-      "defaultValue": "qm",
-      "required": "true"
-    },
-    { "name": "Match #",
-      "code": "m",
-      "type": "match",
-      "min": 1,
-      "max": 150,
-      "required": "true"
-    },
-    { "name": "Robot",
-      "code": "r",
-      "type": "robot",
-      "choices": {
-        "r1": "Red-1",
-        "b1": "Blue-1<br>",
-        "r2": "Red-2",
-        "b2": "Blue-2<br>",
-        "r3": "Red-3",
-        "b3": "Blue-3"
+        "r1": "Red-1", "b1": "Blue-1<br>",
+        "r2": "Red-2", "b2": "Blue-2<br>",
+        "r3": "Red-3", "b3": "Blue-3"
       },
       "required": "true"
     },
-    { "name": "Team #",
-      "code": "t",
-      "type": "team",
-      "min": 1,
-      "max": 99999
-    },
+    { "name": "Team #", "code": "t", "type": "team", "min": 1, "max": 99999 },
+
     { "name": "Auto Start Location",
       "code": "as",
       "type": "clickable_image",
@@ -65,7 +33,10 @@ var config_data = `
       "shape": "circle 5 black red true"
     }
   ],
+
   "auton": [
+    { "name": "Leave Starting Location", "code": "als", "type": "bool" },
+
     { "name": "Auto Shooting Location",
       "code": "asl",
       "type": "clickable_image",
@@ -75,105 +46,63 @@ var config_data = `
       "expectedMax": 5,
       "shape": "circle 5 black red true"
     },
-    { "name": "Fuel Scored",
-      "code": "afs",
-      "expectedMax": 32,
-      "altInc1": 10,
-      "altInc2": 5,
-      "type": "counter"
-    },
-    { "name": "Pass from Neutral Zone",
-      "code": "apn",
-      "expectedMax": 60,
-      "altInc1": 10,
-      "altInc2": 5,
-      "type": "counter"
-    },
-    { "name": "Climb (L1)",
-      "code": "ac",
-      "type": "radio",
-      "choices": {
-        "c": "Climbed<br>",
-        "a": "Attempted<br>",
-        "x": "Not Attempted"
-      },
-      "defaultValue": "x"
-    },
-    { "name": "Pickup from Depot",
-      "code": "afd",
-      "type": "bool"
-    },
-    { "name": "Pickup from Outpost",
-      "code": "afo",
-      "type": "bool"
-    },
-    { "name": "Pickup from Neutral Zone",
-      "code": "aff",
-      "type": "bool"
-    }
+
+    { "name": "Fuel Scored", "code": "afs", "type": "counter", "expectedMax": 32, "altInc1": 10, "altInc2": 5 },
+
+    { "name": "Fuel Missed", "code": "afm", "type": "counter", "expectedMax": 32 },
+    { "name": "Fuel Dropped", "code": "afd", "type": "counter", "expectedMax": 32 },
+
+    { "name": "Pass from Neutral Zone", "code": "apn", "type": "counter", "expectedMax": 60, "altInc1": 10, "altInc2": 5 },
+
+    { "name": "Attempt Climb", "code": "aca", "type": "bool" },
+    { "name": "Climb Successful", "code": "acs", "type": "bool" },
+    { "name": "Climb Time (sec)", "code": "act", "type": "number", "min": 0, "max": 200 },
+
+    { "name": "Pickup from Depot", "code": "afd2", "type": "bool" },
+    { "name": "Pickup from Outpost", "code": "afo", "type": "bool" },
+    { "name": "Pickup from Neutral Zone", "code": "aff", "type": "bool" }
   ],
+
   "teleop": [
-    { "name": "Shooting Locations",
-      "code": "tsl",
-      "type": "clickable_image",
-      "filename": "2026/half_field.png",
-      "dimensions": "7 10",
-      "allowableResponses": "1 2 3 4 8 9 10 11 15 16 17 18 22 23 24 25 29 30 31 32 36 37 38 39 43 44 45 46 50 51 52 53 57 58 59 60 64 65 66 67",
-      "expectedMax": 25,
-      "shape": "circle 5 black red true"
-    },
-    { "name": "Fuel Scored",
-      "code": "tfs",
-      "expectedMax": 150,
-      "altInc1": 10,
-      "altInc2": 5,
-      "type": "counter"
-    },
-    { "name": "Pass from Neutral Zone",
-      "code": "pnz",
-      "expectedMax": 250,
-      "altInc1": 10,
-      "altInc2": 5,
-      "type": "counter"
-    },
-    { "name": "Pass from Opp Alliance Zone",
-      "code": "poa",
-      "expectedMax": 250,
-      "altInc1": 10,
-      "altInc2": 5,
-      "type": "counter"
-    },
-    { "name": "Pickup from Depot",
-      "code": "tfd",
-      "type": "bool"
-    },
-    { "name": "Pickup from Outpost",
-      "code": "tfo",
-      "type": "bool"
-    },
-    { "name": "Pickup from Floor",
-      "code": "tff",
-      "type": "bool"
-    }
+    { "name": "Fuel Scored", "code": "tfs", "type": "counter", "expectedMax": 150, "altInc1": 10, "altInc2": 5 },
+
+    { "name": "Fuel Missed", "code": "tfm", "type": "counter", "expectedMax": 150 },
+    { "name": "Fuel Dropped", "code": "tfd", "type": "counter", "expectedMax": 150 },
+
+    { "name": "Pass from Neutral Zone", "code": "pnz", "type": "counter", "expectedMax": 250, "altInc1": 10, "altInc2": 5 },
+    { "name": "Pass from Opp Alliance Zone", "code": "poa", "type": "counter", "expectedMax": 250, "altInc1": 10, "altInc2": 5 },
+
+    { "name": "Shooting Cycles", "code": "tsc", "type": "counter", "expectedMax": 50 },
+
+    { "name": "Pickup from Depot", "code": "tfd2", "type": "bool" },
+    { "name": "Pickup from Outpost", "code": "tfo", "type": "bool" },
+    { "name": "Pickup from Floor", "code": "tff", "type": "bool" }
   ],
+
   "endgame": [
-    { "name": "Climb",
-      "code": "tc",
+    { "name": "Climb Time (sec)", "code": "ect", "type": "number", "min": 0, "max": 200 },
+
+    { "name": "Climb Level",
+      "code": "ecl",
       "type": "radio",
       "choices": {
+        "0": "0 (No Climb)<br>",
         "1": "Level 1<br>",
         "2": "Level 2<br>",
-        "3": "Level 3<br>",
-        "a": "Attempted<br>",
-        "x": "Not Attempted"
+        "3": "Level 3"
       },
-      "defaultValue": "x"
-    }
+      "defaultValue": "0"
+    },
+
+    { "name": "Attempt Climb", "code": "eca", "type": "bool" },
+    { "name": "Climb Successful", "code": "ecs", "type": "bool" }
   ],
+
   "postmatch": [
-    { "name": "Driver Skill",
-      "code": "ds",
-      "type": "radio",
+    { "name": "Energized RP", "code": "erp", "type": "bool" },
+    { "name": "Supercharged RP", "code": "srp", "type": "bool" },
+
+    { "name": "Driver Skill", "code": "ds", "type": "radio",
       "choices": {
         "n": "Not Effective<br>",
         "a": "Average<br>",
@@ -182,9 +111,8 @@ var config_data = `
       },
       "defaultValue": "x"
     },
-    { "name": "Defense Rating",
-      "code": "dr",
-      "type": "radio",
+
+    { "name": "Defense Rating", "code": "dr", "type": "radio",
       "choices": {
         "b": "Below Average<br>",
         "a": "Average<br>",
@@ -194,9 +122,8 @@ var config_data = `
       },
       "defaultValue": "x"
     },
-    { "name": "Speed Rating",
-      "code": "sr",
-      "type": "radio",
+
+    { "name": "Speed Rating", "code": "sr", "type": "radio",
       "choices": {
         "1": "1 (slow)<br>",
         "2": "2<br>",
@@ -204,49 +131,19 @@ var config_data = `
         "4": "4<br>",
         "5": "5 (fast)"
       },
-      "defaultValue":"3"
+      "defaultValue": "3"
     },
-    { "name": "Crossed Bump",
-      "code": "bmp",
-      "type": "bool"
-    },
-    { "name": "Crossed Trench",
-      "code": "tre",
-      "type": "bool"
-    },
-    { "name": "Died/Immobilized",
-      "code": "die",
-      "type": "bool"
-    },
-    { "name": "Tippy<br>(almost tipped over)",
-      "code": "tip",
-      "type": "bool"
-    },
-    { "name": "Make good<br>alliance partner?",
-      "tooltip": "Would you want this robot on your alliance in eliminations?",
-      "code": "all",
-      "type": "bool"
-    },
-    { "name": "Was Defended",
-      "code": "def",
-      "type": "bool"
-    },
-    { "name": "Excessive Penalties",
-      "code": "pen",
-      "type": "bool"
-    },
-    { "name": "Fuel Percentage",
-      "tooltip": "What percentage of the total fuel for this alliance did this robot score?",
-      "code": "pct",
-      "type": "number",
-      "min": 0,
-      "max": 100
-    },
-    { "name": "Comments",
-      "code": "co",
-      "type": "text",
-      "size": 15,
-      "maxSize": 55
-    }
+
+    { "name": "Crossed Bump", "code": "bmp", "type": "bool" },
+    { "name": "Crossed Trench", "code": "tre", "type": "bool" },
+
+    { "name": "Was Defended", "code": "def", "type": "bool" },
+    { "name": "Died/Immobilized", "code": "die", "type": "bool" },
+
+    { "name": "Beached on Balls", "code": "bob", "type": "bool" },
+
+    { "name": "Make good alliance partner?", "code": "all", "type": "bool" },
+
+    { "name": "Comments", "code": "co", "type": "text", "size": 15, "maxSize": 55 }
   ]
 }`;
