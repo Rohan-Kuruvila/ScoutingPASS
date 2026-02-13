@@ -47,16 +47,16 @@ var config_data = `
       "shape": "circle 5 black red true"
     },
 
-    { "name": "Fuel Scored", "code": "afs", "type": "counter", "expectedMax": 32, "altInc1": 10, "altInc2": 5 },
-
-    { "name": "Fuel Missed", "code": "afm", "type": "counter", "expectedMax": 32 },
-    { "name": "Fuel Dropped", "code": "afd", "type": "counter", "expectedMax": 32 },
+    { "name": "Fuel Scored", "code": "afs", "type": "counter", "expectedMax": 32, "altInc1": 10, "altInc2": 5, "newline": true },
+    
+    { "name": "Fuel Missed", "code": "afm", "type": "counter", "expectedMax": 32, "newline": true },
+    { "name": "Fuel Dropped", "code": "afd", "type": "counter", "expectedMax": 32, "newline": true },
 
     { "name": "Pass from Neutral Zone", "code": "apn", "type": "counter", "expectedMax": 60, "altInc1": 10, "altInc2": 5 },
 
     { "name": "Attempt Climb", "code": "aca", "type": "bool" },
     { "name": "Climb Successful", "code": "acs", "type": "bool" },
-    { "name": "Climb Time (sec)", "code": "act", "type": "number", "min": 0, "max": 200 },
+    { "name": "Climb Time (sec)", "code": "act", "type": "timer" },
 
     { "name": "Pickup from Depot", "code": "afd2", "type": "bool" },
     { "name": "Pickup from Outpost", "code": "afo", "type": "bool" },
@@ -80,7 +80,7 @@ var config_data = `
   ],
 
   "endgame": [
-    { "name": "Climb Time (sec)", "code": "ect", "type": "number", "min": 0, "max": 200 },
+    { "name": "Climb Time (sec)", "code": "ect", "type": "timer" },
 
     { "name": "Climb Level",
       "code": "ecl",
@@ -104,21 +104,21 @@ var config_data = `
 
     { "name": "Driver Skill", "code": "ds", "type": "radio",
       "choices": {
-        "n": "Not Effective<br>",
-        "a": "Average<br>",
-        "v": "Very Effective<br>",
-        "x": "Not Observed"
+        "n": "Not Observed<br>",
+        "a": "Not Effective<br>",
+        "v": "Average<br>",
+        "x": "Very Effective"
       },
       "defaultValue": "x"
     },
 
     { "name": "Defense Rating", "code": "dr", "type": "radio",
       "choices": {
-        "b": "Below Average<br>",
-        "a": "Average<br>",
-        "g": "Good<br>",
-        "e": "Excellent<br>",
-        "x": "Did not play defense"
+        "0": "Did not play defense<br>",
+        "1": "Below Average<br>",
+        "2": "Average<br>",
+        "3": "Good<br>",
+        "4": "Excellent"
       },
       "defaultValue": "x"
     },
@@ -145,5 +145,30 @@ var config_data = `
     { "name": "Make good alliance partner?", "code": "all", "type": "bool" },
 
     { "name": "Comments", "code": "co", "type": "text", "size": 15, "maxSize": 55 }
+  ],
+
+  "analysis": [
+    { "name": "Fuel Capacity", "code": "pfc", "type": "number", "newline": true },
+
+    { "name": "Pickup from Depot", "code": "ppd", "type": "bool" },
+    { "name": "Pickup from Outpost", "code": "ppo", "type": "bool" },
+    { "name": "Pickup from Neutral Zone", "code": "ppn", "type": "bool", "newline": true },
+
+    { "name": "Bump", "code": "pbump", "type": "bool" },
+    { "name": "Trench", "code": "ptrench", "type": "bool", "newline": true },
+
+    { "name": "Additional Type Notes", "code": "ptype", "type": "text", "newline": true },
+
+    { "name": "Preferred Robot Strategy",
+      "code": "pstrat",
+      "type": "radio",
+      "choices": {
+        "S": "Scorer",
+        "D": "Defense",
+        "P": "Shuttle",
+        "H": "Hybrid"
+      },
+      "newline": true
+    }
   ]
 }`;
