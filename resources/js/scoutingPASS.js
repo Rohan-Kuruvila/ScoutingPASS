@@ -831,6 +831,14 @@ function configure() {
     idx = addElement(pmt, idx, element);
   });
 
+  // Configure analysis screen
+  var anc = mydata.analysis;
+  var ant = document.getElementById("analysis_table");
+  idx = 0;
+  anc.forEach(element => {
+    idx = addElement(ant, idx, element);
+  });
+
   if (!enableGoogleSheets) {
     document.getElementById("submit").style.display = "none";
   }
